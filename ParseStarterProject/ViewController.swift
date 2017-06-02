@@ -128,10 +128,12 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         
+        let loggedUser = PFUser.current()?.username
+        
         if PFUser.current() != nil {
         
             performSegue(withIdentifier: "showUserTable", sender: self)
-            print("There is a user currently logged in")
+            print("\(String(describing: loggedUser)) is currently logged in")
             
         } else {
             
