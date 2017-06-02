@@ -12,6 +12,8 @@ import Parse
 class UserTableViewController: UITableViewController {
     
     var usernames = [String]()
+    var userIDs = [String]()
+    var isFollowing = [String: Bool]()
     
     @IBAction func logout(_ sender: Any) {
         
@@ -40,20 +42,59 @@ class UserTableViewController: UITableViewController {
                 
             } else if let users = objects {
                 
+                self.isFollowing.removeAll()
+                
                 for object in users {
+                    
                     if let user = object as? PFUser {
                         
-                        self.usernames.append(user.username!)
+                        if user.objectId != PFUser.current()?.objectId {
+                            
+                            let usernameArray = user.username!.components(separatedBy: "@")
+                            
+                            self.usernames.append(usernameArray[0])
+                            self.userIDs.append(user.objectId!)
+                            
+                            let query = PFQuery(className: "Followers")
+                            
+                            query.whereKey("followers", equalTo: (PFUser.current()?.objectId)!)
+                            query.whereKey("following", equalTo: (user.objectId)!)
+                            
+                            query.findObjectsInBackground { (objects, error) in
+                                
+                                if let objects = objects {
+                                    
+                                    if objects.count > 0 {
+                                        
+                                        self.isFollowing[user.objectId!] = true
+                                        
+                                    } else {
+                                        
+                                        self.isFollowing[user.objectId!] = false
+                                        
+                                    }
+                                    
+                                    if self.isFollowing.count == self.usernames.count {
+                                        
+                                        let countOfUsernames = self.usernames.count
+                                        print("There are \(countOfUsernames) user names exist in the Parse Server.")
+                                        
+                                        self.tableView.reloadData()
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+                            
+                            //self.tableView.reloadData()
+                        }
                         
                     }
                     
                 }
                 
             }
-            
-            let countOfUsernames = self.usernames.count
-            print("There are \(countOfUsernames) user names exist in the Parse Server.")
-            self.tableView.reloadData()
             
         })
         
@@ -84,8 +125,60 @@ class UserTableViewController: UITableViewController {
         
         cell.textLabel?.text = usernames[indexPath.row]
         
+        if isFollowing[userIDs[indexPath.row]]! {
+            
+            cell.accessoryType = UITableViewCellAccessoryType.checkmark
+            
+        }
+        
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cell = tableView.cellForRow(at: indexPath)
+        
+        if isFollowing[userIDs[indexPath.row]]! { //Unfollow
+            
+            isFollowing[userIDs[indexPath.row]] = false
+            
+            cell?.accessoryType = UITableViewCellAccessoryType.none
+            
+            let query = PFQuery(className: "Followers")
+            
+            query.whereKey("followers", equalTo: PFUser.current()?.objectId!)
+            query.whereKey("following", equalTo: userIDs[indexPath.row])
+            
+            query.findObjectsInBackground(block: { (objects, error) in
+                
+                if let objects = objects {
+                    
+                    for object in objects {
+                        
+                        object.deleteInBackground()
+                        
+                    }
+                    
+                }
+                
+            })
+            
+        } else { //Follow
+            
+            isFollowing[userIDs[indexPath.row]] = true
+            
+            cell?.accessoryType = UITableViewCellAccessoryType.checkmark
+            
+            let following = PFObject(className: "Followers")
+            
+            following["followers"] = PFUser.current()?.objectId
+            following["following"] = userIDs[indexPath.row]
+            following.saveInBackground()
+            
+        }
+        
+    }
+    
     
     
     /*
