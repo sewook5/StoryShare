@@ -102,7 +102,7 @@
             </objects>
             <point key="canvasLocation" x="343" y="878"/>
         </scene>
-        <!--Users-->
+        <!--Users to Follow-->
         <scene sceneID="CMs-81-z7T">
             <objects>
                 <tableViewController id="RI3-ER-wmN" customClass="UserTableViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
@@ -115,7 +115,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DhO-P5-vGs" id="73D-Kk-WKo">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -125,7 +125,12 @@
                             <outlet property="delegate" destination="RI3-ER-wmN" id="80d-WJ-bQf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Users" id="bRC-yR-BzO">
+                    <navigationItem key="navigationItem" title="Users to Follow" id="bRC-yR-BzO">
+                        <barButtonItem key="leftBarButtonItem" title="Post" id="Hr4-iP-pUM">
+                            <connections>
+                                <segue destination="qat-NN-5uV" kind="show" id="Iwh-8t-BXx"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="Eqe-xD-vQa">
                             <connections>
                                 <action selector="logout:" destination="RI3-ER-wmN" id="aaO-FC-ls0"/>
@@ -139,6 +144,66 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8Z-sI-YZZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1968.8" y="138.98050974512745"/>
+        </scene>
+        <!--Post-->
+        <scene sceneID="k7O-Gw-HIW">
+            <objects>
+                <viewController title="Post" id="qat-NN-5uV" customClass="PostViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="hJe-Bo-kYl"/>
+                        <viewControllerLayoutGuide type="bottom" id="9Vk-ov-niG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KQa-OU-sGa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-k2-ZlS">
+                                <rect key="frame" x="127" y="344" width="121" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Choose An Image"/>
+                                <connections>
+                                    <action selector="chooseAnImage:" destination="qat-NN-5uV" eventType="touchUpInside" id="vdg-Q6-rf1"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write your stories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ese-77-URj">
+                                <rect key="frame" x="31" y="382" width="313" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="My-Story-Book-Maker-Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bvx-7C-dib">
+                                <rect key="frame" x="62.5" y="79" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="64y-2f-pA4"/>
+                                    <constraint firstAttribute="height" constant="250" id="awi-SG-dQw"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-ux-8iq">
+                                <rect key="frame" x="152" y="420" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Post Story">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="postStory:" destination="qat-NN-5uV" eventType="touchUpInside" id="GSt-Ie-dcT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Bvx-7C-dib" firstAttribute="centerX" secondItem="KQa-OU-sGa" secondAttribute="centerX" id="JUc-xO-buF"/>
+                            <constraint firstItem="Bvx-7C-dib" firstAttribute="top" secondItem="hJe-Bo-kYl" secondAttribute="bottom" constant="15" id="fWY-Yc-C6C"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageToPost" destination="Bvx-7C-dib" id="vQE-Wc-v0M"/>
+                        <outlet property="messageTextField" destination="ese-77-URj" id="VkF-PP-zQX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LZI-d1-H0q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2901.5999999999999" y="138.98050974512745"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Oee-hv-aQP">
@@ -157,4 +222,7 @@
             <point key="canvasLocation" x="1087" y="139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="My-Story-Book-Maker-Icon.png" width="300" height="300"/>
+    </resources>
 </document>

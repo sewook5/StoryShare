@@ -15,6 +15,8 @@ class UserTableViewController: UITableViewController {
     var userIDs = [String]()
     var isFollowing = [String: Bool]()
     
+    var refresher: UIRefreshControl!
+    
     @IBAction func logout(_ sender: Any) {
         
         PFUser.logOut()
@@ -29,8 +31,9 @@ class UserTableViewController: UITableViewController {
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func refresh() {
+        
+        print("Refresh function called")
         
         let query = PFUser.query()
         
@@ -42,6 +45,8 @@ class UserTableViewController: UITableViewController {
                 
             } else if let users = objects {
                 
+                self.userIDs.removeAll()
+                self.usernames.removeAll()
                 self.isFollowing.removeAll()
                 
                 for object in users {
@@ -58,9 +63,9 @@ class UserTableViewController: UITableViewController {
                             let query = PFQuery(className: "Followers")
                             
                             query.whereKey("followers", equalTo: (PFUser.current()?.objectId)!)
-                            query.whereKey("following", equalTo: (user.objectId)!)
+                            query.whereKey("following", equalTo: user.objectId!)
                             
-                            query.findObjectsInBackground { (objects, error) in
+                            query.findObjectsInBackground (block: {(objects, error) in
                                 
                                 if let objects = objects {
                                     
@@ -81,11 +86,13 @@ class UserTableViewController: UITableViewController {
                                         
                                         self.tableView.reloadData()
                                         
+                                        self.refresher.endRefreshing()
+                                        
                                     }
                                     
                                 }
                                 
-                            }
+                            })
                             
                             //self.tableView.reloadData()
                         }
@@ -97,6 +104,23 @@ class UserTableViewController: UITableViewController {
             }
             
         })
+        
+    }
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        refresh()
+        
+        refresher = UIRefreshControl()
+        
+        refresher.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        
+        refresher.addTarget(self, action: #selector(UserTableViewController.refresh), for: .valueChanged)
+        
+        tableView.addSubview(refresher)
         
     }
     
@@ -146,7 +170,7 @@ class UserTableViewController: UITableViewController {
             
             let query = PFQuery(className: "Followers")
             
-            query.whereKey("followers", equalTo: PFUser.current()?.objectId!)
+            query.whereKey("followers", equalTo: (PFUser.current()?.objectId!)!)
             query.whereKey("following", equalTo: userIDs[indexPath.row])
             
             query.findObjectsInBackground(block: { (objects, error) in
