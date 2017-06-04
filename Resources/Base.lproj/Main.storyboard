@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -102,6 +103,66 @@
             </objects>
             <point key="canvasLocation" x="343" y="878"/>
         </scene>
+        <!--Your Feed-->
+        <scene sceneID="o79-pc-iBe">
+            <objects>
+                <tableViewController title="Your Feed" id="RCB-1P-KDF" customClass="FeedTableViewController" customModule="ParseStarterProject_Swift" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="362" sectionHeaderHeight="28" sectionFooterHeight="28" id="wB9-pb-Ao6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="362" id="Ys8-Nh-pk8" customClass="FeedTableViewCell" customModule="ParseStarterProject_Swift" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="362"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ys8-Nh-pk8" id="Z6R-de-TcN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="362"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Gxf-SH-1Sj">
+                                            <rect key="frame" x="62" y="23" width="250" height="250"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="250" id="88U-WR-M5I"/>
+                                                <constraint firstAttribute="height" constant="250" id="Jyl-XB-KH1"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RCw-36-Sad">
+                                            <rect key="frame" x="8" y="281" width="359" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soG-jV-CeK">
+                                            <rect key="frame" x="8" y="318" width="359" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Gxf-SH-1Sj" firstAttribute="top" secondItem="Z6R-de-TcN" secondAttribute="topMargin" constant="15" id="t1P-Td-cnQ"/>
+                                        <constraint firstItem="Gxf-SH-1Sj" firstAttribute="centerX" secondItem="Z6R-de-TcN" secondAttribute="centerX" id="vNr-b4-XMV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="messageLabel" destination="soG-jV-CeK" id="KyN-wb-jHf"/>
+                                    <outlet property="postedImage" destination="Gxf-SH-1Sj" id="Stz-ed-9Oq"/>
+                                    <outlet property="userNameLabel" destination="RCw-36-Sad" id="e8V-z7-Lbg"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="RCB-1P-KDF" id="uBM-NY-JqJ"/>
+                            <outlet property="delegate" destination="RCB-1P-KDF" id="MjV-b6-hO2"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WCJ-UR-nEW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2604" y="-517.6911544227886"/>
+        </scene>
         <!--Users to Follow-->
         <scene sceneID="CMs-81-z7T">
             <objects>
@@ -126,11 +187,18 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Users to Follow" id="bRC-yR-BzO">
-                        <barButtonItem key="leftBarButtonItem" title="Post" id="Hr4-iP-pUM">
-                            <connections>
-                                <segue destination="qat-NN-5uV" kind="show" id="Iwh-8t-BXx"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Post" id="Hr4-iP-pUM">
+                                <connections>
+                                    <segue destination="qat-NN-5uV" kind="show" id="Iwh-8t-BXx"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Feed" id="ohZ-DW-zmx">
+                                <connections>
+                                    <segue destination="RCB-1P-KDF" kind="show" id="yIc-qK-4of"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" title="Logout" id="Eqe-xD-vQa">
                             <connections>
                                 <action selector="logout:" destination="RI3-ER-wmN" id="aaO-FC-ls0"/>
@@ -158,7 +226,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-k2-ZlS">
-                                <rect key="frame" x="127" y="344" width="121" height="30"/>
+                                <rect key="frame" x="127" y="287" width="121" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Choose An Image"/>
                                 <connections>
@@ -166,21 +234,21 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write your stories" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ese-77-URj">
-                                <rect key="frame" x="31" y="382" width="313" height="30"/>
+                                <rect key="frame" x="31" y="325" width="313" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="My-Story-Book-Maker-Icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="Bvx-7C-dib">
-                                <rect key="frame" x="62.5" y="79" width="250" height="250"/>
+                                <rect key="frame" x="87.5" y="79" width="200" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="64y-2f-pA4"/>
-                                    <constraint firstAttribute="height" constant="250" id="awi-SG-dQw"/>
+                                    <constraint firstAttribute="width" constant="200" id="64y-2f-pA4"/>
+                                    <constraint firstAttribute="height" constant="200" id="awi-SG-dQw"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w1b-ux-8iq">
-                                <rect key="frame" x="152" y="420" width="71" height="30"/>
+                                <rect key="frame" x="152" y="363" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Post Story">
                                     <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
