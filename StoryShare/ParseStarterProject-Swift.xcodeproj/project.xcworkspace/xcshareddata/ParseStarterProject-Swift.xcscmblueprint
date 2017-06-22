@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "289D49781B60B59A34D76666B0E980CF7D5395A3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "289D49781B60B59A34D76666B0E980CF7D5395A3" : 9223372036854775807,
+    "8CB130CB9D89F581D9F2C63768820FE7EED04477" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "F14D3B9E-4CBC-49E6-AA90-C024E77A202A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "289D49781B60B59A34D76666B0E980CF7D5395A3" : "Parse_Project\/",
+    "8CB130CB9D89F581D9F2C63768820FE7EED04477" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "ParseStarterProject-Swift",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "ParseStarterProject-Swift.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:sewook5\/StoryShare.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "289D49781B60B59A34D76666B0E980CF7D5395A3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/sewook5\/swift-app.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "8CB130CB9D89F581D9F2C63768820FE7EED04477"
+    }
+  ]
+}
